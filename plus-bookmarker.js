@@ -17,8 +17,8 @@ function createBookmarkButton(){
 	bookmark_dom.className = "dk";
 	
 	bookmark_span_dom = document.createElement('span');
-	bookmark_span_dom.className = "sr";
-	bookmark_span_dom.innerText = '*';
+	bookmark_span_dom.className = "sr bi";
+	bookmark_span_dom.innerText = '☆';
 	
 	bookmark_dom.appendChild(bookmark_span_dom);
 	
