@@ -1,4 +1,3 @@
-var plusPrefix = "https://plus.google.com/u/0/";
 var localStorageKeyPrefix = "plus-book-";
 
 function addBookmarkButtonToEachPostActionBlock() {
@@ -28,13 +27,14 @@ function createBookmarkButton(){
 }
 
 function bookmarkButtonClicked(event) {
-	linkElementEndPart = event.target.parentElement.parentElement.parentElement.getElementsByClassName("g-M-n")[0].getAttribute('href');
-	link = plusPrefix + linkElementEndPart;
-	window.localStorage.setItem(localStorageKeyPrefix + linkElementEndPart, link);
-	notify(link);
+	postContainer = $(event.target).parents(".ii")[0];
+	postLinkId = postContainer.getElementsByClassName("g-M-n")[0].getAttribute('href');
+	postLink = postContainer.baseURI + postLinkId;
+	window.localStorage.setItem(localStorageKeyPrefix + postLinkId, postLink);
+	notify(postLink);
 }
 
-function notify(link){
+function notify(postLink){
 	if (window.webkitNotifications.checkPermission() == 0) {
 		window.webkitNotifications.createNotification(
 		'sample-48.png', 'New Plus bookmark', ' has been stored as a bookmark');
