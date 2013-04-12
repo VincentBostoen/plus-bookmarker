@@ -3,7 +3,8 @@ var postContainerClassName = ".ii";
 var postIdClassName = "g-M-n";
 var shareButtonsClassName = "dk Pk";
 var actionButtonClassName = "dk";
-var actionButtonContentClassName = "sr bi";
+var bookmarkButtonContentClassName = "sr bi";
+var bookmarkButtonSelector = "span.bi";
 var bookmarkButtonText = '☆';
 
 function addBookmarkButtonToEachPostActionBlock() {
@@ -13,6 +14,10 @@ function addBookmarkButtonToEachPostActionBlock() {
 	shareButtons.forEach(function(shareButton){
 		shareButton.parentElement.insertBefore(createBookmarkButton(), shareButton);
 	});
+
+	$(bookmarkButtonSelector).on("click", function(){
+		bookmarkButtonClicked($(this));
+	});
 };
 
 function createBookmarkButton(){
@@ -20,18 +25,16 @@ function createBookmarkButton(){
 	bookmark_dom.className = actionButtonClassName;
 	
 	bookmark_span_dom = document.createElement('span');
-	bookmark_span_dom.className = actionButtonContentClassName;
+	bookmark_span_dom.className = bookmarkButtonContentClassName;
 	bookmark_span_dom.innerText = bookmarkButtonText;
 	
 	bookmark_dom.appendChild(bookmark_span_dom);
 	
-	bookmark_dom.addEventListener("click", bookmarkButtonClicked, false);
-	
 	return bookmark_dom;
 }
 
-function bookmarkButtonClicked(event) {
-	postContainer = $(event.target).parents(postContainerClassName)[0];
+function bookmarkButtonClicked(bookmarkButton) {
+	postContainer = $(bookmarkButton).parents(postContainerClassName)[0];
 	postLinkId = postContainer.getElementsByClassName(postIdClassName)[0].getAttribute('href');
 	postLink = postContainer.baseURI + postLinkId;
 
