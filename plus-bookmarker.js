@@ -6,6 +6,7 @@ var actionButtonClassName = "dk";
 var bookmarkButtonContentClassName = "sr bi";
 var bookmarkButtonSelector = "span.bi";
 var bookmarkButtonText = '☆';
+var tooltipAttributeName = "data-tooltip";
 
 function addBookmarkButtonToEachPostActionBlock() {
 	shareButtonsNodeList = document.getElementsByClassName(shareButtonsClassName);
@@ -23,6 +24,7 @@ function addBookmarkButtonToEachPostActionBlock() {
 function createBookmarkButton(){
 	bookmark_dom = document.createElement('div');
 	bookmark_dom.className = actionButtonClassName;
+	$(bookmark_dom).attr(tooltipAttributeName, "Bookmark this post");
 	
 	bookmark_span_dom = document.createElement('span');
 	bookmark_span_dom.className = bookmarkButtonContentClassName;
