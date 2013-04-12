@@ -9,17 +9,24 @@ var bookmarkButtonText = '☆';
 var tooltipAttributeName = "data-tooltip";
 
 function addBookmarkButtonToEachPostActionBlock() {
-	shareButtonsNodeList = document.getElementsByClassName(shareButtonsClassName);
-	shareButtons = toArray(shareButtonsNodeList);
-	
-	shareButtons.forEach(function(shareButton){
-		shareButton.parentElement.insertBefore(createBookmarkButton(), shareButton);
-	});
+	insertBookmarkButtonBeforeEachShareButtonsUnder(document);
 
-	$(bookmarkButtonSelector).on("click", function(){
-		bookmarkButtonClicked($(this));
+	$(document).on('DOMNodeInserted', function(e) {
+		if (e.target.id.substring(0, 6) == "update") {
+			insertBookmarkButtonBeforeEachShareButtonsUnder(e.target);
+		}
 	});
 };
+
+function insertBookmarkButtonBeforeEachShareButtonsUnder(parent){
+	shareButtonsNodeList = parent.getElementsByClassName(shareButtonsClassName);
+	shareButtons = toArray(shareButtonsNodeList);
+	shareButtons.forEach(insertNewBookmarkButtonBefore);
+}
+
+function insertNewBookmarkButtonBefore(shareButton){
+	shareButton.parentElement.insertBefore(createBookmarkButton(), shareButton);
+}
 
 function createBookmarkButton(){
 	bookmark_dom = document.createElement('div');
@@ -32,6 +39,10 @@ function createBookmarkButton(){
 	
 	bookmark_dom.appendChild(bookmark_span_dom);
 	
+	$(bookmark_dom).on("click", function(){
+		bookmarkButtonClicked($(this));
+	});
+
 	return bookmark_dom;
 }
 
