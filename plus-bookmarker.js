@@ -1,4 +1,4 @@
-var localStorageKeyPrefix = "plus-book-";
+var storageKeyPrefix = "plus-book-";
 var postContainerClassName = ".ii";
 var postIdClassName = "g-M-n";
 var shareButtonsClassName = "dk Pk";
@@ -34,17 +34,8 @@ function bookmarkButtonClicked(event) {
 	postContainer = $(event.target).parents(postContainerClassName)[0];
 	postLinkId = postContainer.getElementsByClassName(postIdClassName)[0].getAttribute('href');
 	postLink = postContainer.baseURI + postLinkId;
-	window.localStorage.setItem(localStorageKeyPrefix + postLinkId, postLink);
-	notify(postLink);
-}
 
-function notify(postLink){
-	if (window.webkitNotifications.checkPermission() == 0) {
-		window.webkitNotifications.createNotification(
-		'48.png', 'New Plus bookmark', ' has been stored as a bookmark');
-	} else {
-		window.webkitNotifications.requestPermission();
-	}
+	window.localStorage.setItem(storageKeyPrefix + postLinkId, postLink);
 }
 
 function toArray(nodeList) {
