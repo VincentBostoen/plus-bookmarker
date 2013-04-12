@@ -1,5 +1,7 @@
 var storageKeyPrefix = "plus-book-";
+var newsFeedContainerClassName = "Nj mu";
 var postContainerClassName = ".ii";
+var updatedContainerIdPrefix = "update";
 var postIdClassName = "g-M-n";
 var shareButtonsClassName = "dk Pk";
 var actionButtonClassName = "dk";
@@ -12,11 +14,20 @@ function addBookmarkButtonToEachPostActionBlock() {
 	insertBookmarkButtonBeforeEachShareButtonsUnder(document);
 
 	$(document).on('DOMNodeInserted', function(e) {
-		if (e.target.id.substring(0, 6) == "update") {
+		console.log(e.target);
+		if (elementIsANewPostContainer(e.target) || elementIsANewFeedContainer(e.target)) {
 			insertBookmarkButtonBeforeEachShareButtonsUnder(e.target);
 		}
 	});
 };
+
+function elementIsANewPostContainer(element){
+	return element.id.substring(0, 6) == updatedContainerIdPrefix;
+}
+
+function elementIsANewFeedContainer(element){
+	return element.className == newsFeedContainerClassName;
+}
 
 function insertBookmarkButtonBeforeEachShareButtonsUnder(parent){
 	shareButtonsNodeList = parent.getElementsByClassName(shareButtonsClassName);
