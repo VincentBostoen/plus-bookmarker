@@ -14,7 +14,6 @@ function addBookmarkButtonToEachPostActionBlock() {
 	insertBookmarkButtonBeforeEachShareButtonsUnder(document);
 
 	$(document).on('DOMNodeInserted', function(e) {
-		console.log(e.target);
 		if (elementIsANewPostContainer(e.target) || elementIsANewFeedContainer(e.target)) {
 			insertBookmarkButtonBeforeEachShareButtonsUnder(e.target);
 		}
