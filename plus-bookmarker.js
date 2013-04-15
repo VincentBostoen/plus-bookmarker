@@ -14,7 +14,7 @@ function addBookmarkButtonToEachPostActionBlock() {
 	insertBookmarkButtonBeforeEachShareButtonsUnder(document);
 
 	$(document).on('DOMNodeInserted', function(e) {
-		if (elementIsANewPostContainer(e.target) || elementIsANewFeedContainer(e.target)) {
+		if (elementIsANewPostContainer(e.target) || elementIsANewFeedContainer(e.target) || elementIsAStreamRefresh(e.target)) {
 			insertBookmarkButtonBeforeEachShareButtonsUnder(e.target);
 		}
 	});
@@ -26,6 +26,10 @@ function elementIsANewPostContainer(element){
 
 function elementIsANewFeedContainer(element){
 	return element.className == newsFeedContainerClassName;
+}
+
+function elementIsAStreamRefresh(element){
+	return element.tagName == "DIV";
 }
 
 function insertBookmarkButtonBeforeEachShareButtonsUnder(parent){
