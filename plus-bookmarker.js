@@ -65,7 +65,14 @@ function bookmarkButtonClicked(bookmarkButton) {
 	postLinkId = postContainer.getElementsByClassName(postIdClassName)[0].getAttribute('href');
 	postLink = postContainer.baseURI + postLinkId;
 
-	window.localStorage.setItem(storageKeyPrefix + postLinkId, postLink);
+	saveBookmark(postLink);
+}
+
+function saveBookmark(bookmark){
+	chrome.extension.sendMessage({text:"saveBookmark", link:bookmark},function(reponse){
+	  if(reponse.type == "saved")
+	    console.log("Bookmark saved");
+	});
 }
 
 function toArray(nodeList) {
