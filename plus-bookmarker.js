@@ -70,8 +70,9 @@ function bookmarkButtonClicked(bookmarkButton) {
 
 function saveBookmark(bookmark){
 	chrome.extension.sendMessage({text:"saveBookmark", link:bookmark},function(reponse){
-	  if(reponse.type == "saved")
-	    console.log("Bookmark saved");
+	  if(reponse.type == "saved") {
+	    	console.log("Bookmark saved sync");
+		}
 	});
 }
 
