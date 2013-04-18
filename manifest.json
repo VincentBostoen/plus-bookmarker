@@ -5,7 +5,8 @@
   "description": "Bookmark posts on Google plus",
   "permissions": [
     "notifications",
-    "storage"
+    "storage",
+    "tabs"
   ],
   "icons": {
     "48" : "48.png",
@@ -14,9 +15,13 @@
   "web_accessible_resources": [
     "48.png"
   ],
-    "background": {
-    "persistent": true,
+  "background": {
     "scripts": ["background.js"]
+  },
+  "page_action": {
+    "default_icon": "19.png",
+    "default_title": "Plus Bookmark",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
