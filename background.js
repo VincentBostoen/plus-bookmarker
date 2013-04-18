@@ -7,7 +7,7 @@ chrome.extension.onMessage.addListener(function(message,sender,sendResponse){
 			bookmarks = new Array();
 		}
 
-		if(bookmarks.indexOf(newBookmark) == -1){
+		if(bookmarkIsNotAlreadyBookmarked(bookmarks, newBookmark)){
 			updateBookmarks(bookmarks, newBookmark);
 		}
 	});
@@ -22,7 +22,11 @@ function updateBookmarks(bookmarks, newBookmark) {
 }
 
 function displayNewBookmarkNotification(newBookmark){
-	var notification = webkitNotifications.createNotification('48.png', 'New bookmark !', newBookmark + ' has been added to bookmarks.');
+	notification = webkitNotifications.createNotification('48.png', 'New bookmark !', newBookmark + ' has been added to bookmarks.');
 	notification.show();
 	setTimeout(function(){notification.close();},3000);
+}
+
+function bookmarkIsNotAlreadyBookmarked(bookmarks, newBookmark){
+	return bookmarks.indexOf(newBookmark) == -1;
 }
