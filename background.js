@@ -11,6 +11,8 @@ chrome.extension.onMessage.addListener(function(message,sender,sendResponse){
 			updateBookmarks(bookmarks, newBookmark);
 		}
 	});
+  } else if(message.text == "displayAction") {
+	chrome.pageAction.show(sender.tab.id);
   }
 });
 

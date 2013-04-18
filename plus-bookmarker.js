@@ -9,6 +9,12 @@ var bookmarkButtonContentClassName = "sr bi";
 var bookmarkButtonSelector = "span.bi";
 var bookmarkButtonText = '☆';
 var tooltipAttributeName = "data-tooltip";
+var actionBarClassName = "q9a fdb";
+
+function init(){
+	addBookmarkButtonToEachPostActionBlock();
+	chrome.extension.sendMessage({text:"displayAction"},function(reponse){});
+}
 
 function addBookmarkButtonToEachPostActionBlock() {
 	insertBookmarkButtonBeforeEachShareButtonsUnder(document);
@@ -81,4 +87,4 @@ function toArray(nodeList) {
     return array;
 }
 
-addBookmarkButtonToEachPostActionBlock();
+init();
