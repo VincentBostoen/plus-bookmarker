@@ -11,6 +11,11 @@ chrome.extension.onMessage.addListener(function(message,sender,sendResponse){
 			updateBookmarks(bookmarks, newBookmark);
 		}
 	});
+  } else if(message.text == "listBookmarks") {
+  	chrome.storage.sync.get("bookmarks", function(storageEntry) {
+  		bookmarks = storageEntry.bookmarks;
+  		chrome.extension.sendMessage({text:"displayBookmarks", list:bookmarks},function(reponse){});
+	});
   } else if(message.text == "displayAction") {
 	chrome.pageAction.show(sender.tab.id);
   }
